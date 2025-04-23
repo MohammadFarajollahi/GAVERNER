@@ -1,7 +1,8 @@
-#include <Servo.h>
+#define stepPin 9
+#define dirPin 10
+
 #define RPM_INPUT_PIN 2
 const int sensorPin = 2;  // سنسور RPM
-#define SERVO_PIN 9
 #define CURRENT_SENSOR_PIN A0
 #include <SPI.h>
 #define Number_MAX7219 1      // 3 chips = 24 digits
@@ -16,7 +17,6 @@ volatile unsigned long pulseCount = 0;
 unsigned long lastRPMTime = 0;
 int currentRPM = 0;
 int servoAngle = 0;
-Servo throttleServo;
 volatile unsigned long lastPulseTime = 0;
 int rpmCount;
 
@@ -31,14 +31,16 @@ int currentServoAngle;
 
 int maxCurrent = 60;
 
-int maxAngle = 15;
-int maxRPM = 1240;
+int maxAngle = 20;
+int maxRPM = 1230;  // 1240
 int minRPM;
 int lastAngle;
 int rpmThreshold = 30;
 int rpmThresholdHigh = 100;
 int checkTime = 100;
 int LowRpm;
+
+int adcSampleTime;
 
 int minimumRPM;
 int lastminimumRPM;
@@ -54,20 +56,52 @@ int angle;
 int RPMok;
 int checkrpm;
 int checkrpm2;
+
+int buttonTest = A0;
+int buttUP = A1;
+int buttDown = 4;
+int led = 7;
+
+int stepMove;
+int Up;
+int Down;
+
+int lowRpmCheck;
+
+int sowichMode;
+
+int angleStart;
+
+int ZeroPos = 300;
 void setup() {
   Serial.begin(9600);
   attachInterrupt(digitalPinToInterrupt(sensorPin), pulseDetected, FALLING);
-  throttleServo.attach(SERVO_PIN);
-  throttleServo.write(0);
-  delay(1000);
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(buttonTest, INPUT);
+  pinMode(buttUP, INPUT);
+  pinMode(buttDown, INPUT);
+  for (int i = 0; i < ZeroPos; i++) stepDown();
+  digitalWrite(led, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(500);               // wait for a second
+  digitalWrite(led, LOW);   // turn the LED off by making the voltage LOW
+  delay(500);
 }
 
 void loop() {
 
   RPM();
- // servo2();
+  if (digitalRead(buttonTest) == 0) {
+    if (sowichMode == 1) {
+      sowichMode = 0;
+      angleStart = 0;
+      for (int i = 0; i < ZeroPos; i++) stepDown();
+    }
+    Steper();
+  }
 
-  test();
+  if (digitalRead(buttonTest) == 1) test();
 }
 
 
