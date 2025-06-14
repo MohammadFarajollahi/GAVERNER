@@ -1,0 +1,572 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Radical.ServiceModel</name>
+    </assembly>
+    <members>
+        <member name="T:Topics.Radical.ServiceModel.IServerMessageHeaderManagerFactory">
+            <summary>
+            An <see cref="T:Topics.Radical.ServiceModel.IServerMessageHeaderManagerFactory"/> is responsbile
+            for the creation of <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> instances at
+            the server side.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IServerMessageHeaderManagerFactory.Create">
+            <summary>
+            Creates a new <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/>.
+            </summary>
+            <returns>The new IMessageHeaderManager.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider">
+            <summary>
+            Provides support for a default instance provider with support for inversion of control.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider.#ctor(System.IServiceProvider,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="serviceType">Type of the service.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider.GetServiceContract(System.Type)">
+            <summary>
+            Gets the service contract.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <returns>The service contract.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider.GetInstance(System.ServiceModel.InstanceContext)">
+            <summary>
+            Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext"/> object.
+            </summary>
+            <param name="instanceContext">The current <see cref="T:System.ServiceModel.InstanceContext"/> object.</param>
+            <returns>A user-defined service object.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider.GetInstance(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)">
+            <summary>
+            Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext"/> object.
+            </summary>
+            <param name="instanceContext">The current <see cref="T:System.ServiceModel.InstanceContext"/> object.</param>
+            <param name="message">The message that triggered the creation of a service object.</param>
+            <returns>The service object.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)">
+            <summary>
+            Called when an <see cref="T:System.ServiceModel.InstanceContext"/> object recycles a service object.
+            </summary>
+            <param name="instanceContext">The service's instance context.</param>
+            <param name="instance">The service object to be recycled.</param>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory">
+            <summary>
+            Factory that provides instances of <see cref="T:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory"/> in managed
+            hosting environments where the host instance is created dynamically in response
+            to incoming messages.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory.OnCreateServiceHost(System.Type,System.Uri[])">
+            <summary>
+            Creates a <see cref="T:System.ServiceModel.ServiceHost"/> for a specified type of service with a specific base address.
+            </summary>
+            <param name="serviceType">Specifies the type of service to host.</param>
+            <param name="baseAddresses">The <see cref="T:System.Array"/> of type <see cref="T:System.Uri"/> that contains the base addresses for the service hosted.</param>
+            <returns>
+            A <see cref="T:System.ServiceModel.ServiceHost"/> for the type of service specified with a specific base address.
+            </returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory.CreateServiceHost(System.Type,System.Uri[])">
+            <summary>
+            Creates a <see cref="T:System.ServiceModel.ServiceHost"/> for a specified type of service with a specific base address.
+            </summary>
+            <param name="serviceType">Specifies the type of service to host.</param>
+            <param name="baseAddresses">The <see cref="T:System.Array"/> of type <see cref="T:System.Uri"/> that contains the base addresses for the service hosted.</param>
+            <returns>
+            A <see cref="T:System.ServiceModel.ServiceHost"/> for the type of service specified with a specific base address.
+            </returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.AbstractServiceHostFactory.CreateServiceHost(System.String,System.Uri[])">
+            <summary>
+            Creates a <see cref="T:System.ServiceModel.ServiceHost"/> with specific base addresses and initializes it with specified data.
+            </summary>
+            <param name="constructorString">The initialization data passed to the <see cref="T:System.ServiceModel.ServiceHostBase"/> instance being constructed by the factory.</param>
+            <param name="baseAddresses">The <see cref="T:System.Array"/> of type <see cref="T:System.Uri"/> that contains the base addresses for the service hosted.</param>
+            <returns>
+            A <see cref="T:System.ServiceModel.ServiceHost"/> with specific base addresses.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseAddresses"/> is null.</exception>
+            <exception cref="T:System.InvalidOperationException">There is no hosting context provided or <paramref name="constructorString"/> is null or empty.</exception>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.DefaultClientMessageHeaderManagerFactory">
+            <summary>
+            Implements the <see cref="T:Topics.Radical.ServiceModel.IClientMessageHeaderManagerFactory"/> providing
+            a default working implementation.
+            </summary>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.IClientMessageHeaderManagerFactory">
+            <summary>
+            An <see cref="T:Topics.Radical.ServiceModel.IClientMessageHeaderManagerFactory"/> is responsbile
+            for the creation of <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> instances at
+            the client side.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IClientMessageHeaderManagerFactory.Create(System.ServiceModel.IContextChannel)">
+            <summary>
+            Creates a new <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> using the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The new IMessageHeaderManager.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultClientMessageHeaderManagerFactory.Create(System.ServiceModel.IContextChannel)">
+            <summary>
+            Creates a new <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> using the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The new IMessageHeaderManager.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior">
+            <summary>
+            Defines a behavior that can produce a wsdl document
+            compatible with the Soap 1.1 specification, Soap 1.1
+            specs does not includes "wsdl:import" directive.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)">
+            <summary>
+            Writes custom Web Services Description Language (WSDL) elements into the generated WSDL for a contract.
+            </summary>
+            <param name="exporter">The <see cref="T:System.ServiceModel.Description.WsdlExporter"/> that exports the contract information.</param>
+            <param name="context">Provides mappings from exported WSDL elements to the contract description.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)">
+            <summary>
+            Writes custom Web Services Description Language (WSDL) elements into the generated WSDL for an endpoint.
+            </summary>
+            <param name="exporter">The <see cref="T:System.ServiceModel.Description.WsdlExporter"/> that exports the endpoint information.</param>
+            <param name="context">Provides mappings from exported WSDL elements to the endpoint description.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Implement to pass data at runtime to bindings to support custom behavior.
+            </summary>
+            <param name="endpoint">The endpoint to modify.</param>
+            <param name="bindingParameters">The objects that binding elements require to support the behavior.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)">
+            <summary>
+            Implements a modification or extension of the client across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that is to be customized.</param>
+            <param name="clientRuntime">The client runtime to be customized.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)">
+            <summary>
+            Applies the dispatch behavior.
+            </summary>
+            <param name="endpoint">The endpoint.</param>
+            <param name="dispatcher">The dispatcher.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)">
+            <summary>
+            Implement to confirm that the endpoint meets some intended criteria.
+            </summary>
+            <param name="endpoint">The endpoint to validate.</param>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.INeedValidationHeader">
+            <summary>
+            Identifies that an header requires to be validated once
+            extracted from the message.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.INeedValidationHeader.Validate">
+            <summary>
+            Validates this header instance.
+            </summary>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.IMessageHeaderManager">
+            <summary>
+            An <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> is responsbile to
+            bridge the gap between che user code and the complexty
+            of WCF header low level management.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetHeader``1">
+            <summary>
+            Gets the header of the given type first searching in the 
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.TryGetHeader``1(``0@)">
+            <summary>
+            Gets the header of the given type first searching in the
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns><c>True</c> if the requested header has been found; otherwise false.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the header of the given type first searching in the 
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the 
+            header is considered a mandatory header and if no header 
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.SetHeader``1(``0)">
+            <summary>
+            Sets the header in current operation scope.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header to add to the operation context.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetOutgoingHeader``1">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.TryGetOutgoingHeader``1(``0@)">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns><c>True</c> if the requested header has been found; otherwise false.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetOutgoingHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the 
+            header is considered a mandatory header and if no header 
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetIncomingHeader``1">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.TryGetIncomingHeader``1(``0@)">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns><c>True</c> if the requested header has been found; otherwise false.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.IMessageHeaderManager.GetIncomingHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the 
+            header is considered a mandatory header and if no header 
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.DefaultServerMessageHeaderManagerFactory">
+            <summary>
+            Implements the <see cref="T:Topics.Radical.ServiceModel.IServerMessageHeaderManagerFactory"/> providing
+            a default working implementation.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultServerMessageHeaderManagerFactory.Create">
+            <summary>
+            Creates a new <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/>.
+            </summary>
+            <returns>The new IMessageHeaderManager.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Web.ObjectExtensions">
+            <summary>
+            Extends all the objects adding wcf (rest) extensions.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Web.ObjectExtensions.AsJson``1(``0)">
+            <summary>
+            Serialize the supplied source graph in json format.
+            </summary>
+            <typeparam name="T">The type of the source graph.</typeparam>
+            <param name="source">The source graph.</param>
+            <returns>A string in json format.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior">
+            <summary>
+            Provides support for a default service behavior with support for inversion of control.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior.#ctor(System.IServiceProvider,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="serviceType">Type of the service.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior.GetInstanceProvider(System.Type)">
+            <summary>
+            Gets the instance provider.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <returns>The instance provider.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)">
+            <summary>
+            Provides the ability to change run-time property values or insert custom extension objects such as error handlers, message or parameter interceptors, security extensions, and other custom extension objects.
+            </summary>
+            <param name="serviceDescription">The service description.</param>
+            <param name="serviceHostBase">The host that is currently being built.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Provides the ability to pass custom data to binding elements to support the contract implementation.
+            </summary>
+            <param name="serviceDescription">The service description of the service.</param>
+            <param name="serviceHostBase">The host of the service.</param>
+            <param name="endpoints">The service endpoints.</param>
+            <param name="bindingParameters">Custom objects to which binding elements have access.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)">
+            <summary>
+            Provides the ability to inspect the service host and the service description to confirm that the service can run successfully.
+            </summary>
+            <param name="serviceDescription">The service description.</param>
+            <param name="serviceHostBase">The service host that is currently being constructed.</param>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.HeaderSearchBehavior">
+            <summary>
+            Determines if the requested header is Mandatory or Optional.
+            </summary>
+        </member>
+        <member name="F:Topics.Radical.ServiceModel.HeaderSearchBehavior.Optional">
+            <summary>
+            The header is optional, this is the default value.
+            </summary>
+        </member>
+        <member name="F:Topics.Radical.ServiceModel.HeaderSearchBehavior.Mandatory">
+            <summary>
+            The header is mandatory, an exception should be raised if a mandatory header cannot be found.
+            </summary>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.DefaultMessageHeaderManager">
+            <summary>
+            Implements the <see cref="T:Topics.Radical.ServiceModel.IMessageHeaderManager"/> providing
+            a set of default functionalities.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the
+            <see cref="T:Topics.Radical.ServiceModel.DefaultMessageHeaderManager"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.EnsureNotDisposed">
+            <summary>
+            Verifies that this instance is not disposed, throwing an
+            <see cref="T:System.ObjectDisposedException"/> if this instance has
+            been already disposed.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.#ctor(System.ServiceModel.IContextChannel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.DefaultMessageHeaderManager"/> class.
+            </summary>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.DefaultMessageHeaderManager"/> class.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.SetHeader``1(``0)">
+            <summary>
+            Sets the header in current operation scope.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header to add to the operation context.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetHeaderUniqueName``1">
+            <summary>
+            Gets the unique name of the header to use during the 
+            enlinstment of the header into the message.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The name.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetHeaderNamespace``1">
+            <summary>
+            Gets the header namespace to use during the 
+            enlinstment of the header into the message.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The namespace.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetIncomingHeader``1">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetOutgoingHeader``1">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetHeader``1">
+            <summary>
+            Gets the header of the given type first searching in the
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the header of the given type first searching in the
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the
+            header is considered a mandatory header and if no header
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetOutgoingHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the
+            header is considered a mandatory header and if no header
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.GetIncomingHeader``1(Topics.Radical.ServiceModel.HeaderSearchBehavior)">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="searchBehavior">if set to <c>Mandatory</c> then the
+            header is considered a mandatory header and if no header
+            of the given type can be found an exception will be raised.</param>
+            <returns>The header if any; otherwise null.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.TryGetHeader``1(``0@)">
+            <summary>
+            Gets the header of the given type first searching in the
+            incoming headers and then, if no header can be found, in
+            the outgoing headers.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns>
+            	<c>True</c> if the requested header has been found; otherwise false.
+            </returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.TryGetOutgoingHeader``1(``0@)">
+            <summary>
+            Gets the outgoing header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns>
+            	<c>True</c> if the requested header has been found; otherwise false.
+            </returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.DefaultMessageHeaderManager.TryGetIncomingHeader``1(``0@)">
+            <summary>
+            Gets the incoming header of the given type.
+            </summary>
+            <typeparam name="T">The type of the header.</typeparam>
+            <param name="header">The header if any; otherwise null.</param>
+            <returns>
+            	<c>True</c> if the requested header has been found; otherwise false.
+            </returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointSection">
+            <summary>
+            Defines the configuration extension to add the <see cref="T:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointBehavior"/>
+            to the Wcf configuration directly via config file.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointSection.CreateBehavior">
+            <summary>
+            Creates a behavior extension based on the current configuration settings.
+            </summary>
+            <returns>The behavior extension.</returns>
+        </member>
+        <member name="P:Topics.Radical.ServiceModel.Behaviors.InlineWsdlEndpointSection.BehaviorType">
+            <summary>
+            Gets the type of behavior.
+            </summary>
+            <value></value>
+            <returns>A <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost">
+            <summary>
+            Provides a host for services.
+            </summary>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost.#ctor(System.IServiceProvider,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost"/> class.
+            </summary>
+            <param name="serviceProvider">The service provider.</param>
+            <param name="serviceType">Type of the service.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost.#ctor(System.IServiceProvider,System.Type,System.Uri[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost"/> class.
+            </summary>
+            <param name="serviceProvider">The service provider.</param>
+            <param name="serviceType">Type of the service.</param>
+            <param name="baseAddresses">The base addresses.</param>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost.GetInstanceProviderServiceBehavior(System.Type)">
+            <summary>
+            Gets the instance provider service behavior.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <returns>The instance provider service behavior.</returns>
+        </member>
+        <member name="M:Topics.Radical.ServiceModel.Hosting.BasicDependencyInjectionServiceHost.OnOpening">
+            <summary>
+            Invoked during the transition of a communication object into the opening state.
+            </summary>
+        </member>
+    </members>
+</doc>
