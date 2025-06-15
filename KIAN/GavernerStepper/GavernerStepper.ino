@@ -23,8 +23,9 @@ int ledRPM = 3;
 int buttonTest = A0;
 int buttUP = 6;
 int buttDown = 4;
-int led = 8;
+int led = A5;
 int stepEnable = 7;
+int offButton = 8;
 
 int CurrentUser;
 int AngleUser;
@@ -51,8 +52,9 @@ int Down;
 int lowRpmCheck;
 int sowichMode;
 int angleStart;
+int OffMode = 1;
 
-int ZeroPos = 500;
+int ZeroPos = 3000;
 void setup() {
   Serial.begin(115200);
   attachInterrupt(digitalPinToInterrupt(sensorPin), pulseDetected, FALLING);
@@ -62,28 +64,44 @@ void setup() {
   pinMode(led, OUTPUT);
   pinMode(stepEnable, OUTPUT);
   pinMode(buttonTest, INPUT);
+  pinMode(offButton, INPUT);
   pinMode(buttUP, INPUT);
-  // pinMode(sensorPin, INPUT_PULLUP);
   pinMode(buttDown, INPUT);
-  for (int i = 0; i < ZeroPos; i++) stepDown();
+  // for (int i = 0; i < ZeroPos; i++) stepDown();
   digitalWrite(stepEnable, HIGH);
   digitalWrite(led, HIGH);
 
   Serial.println("****start***");
-
-
-
-
 }
 
 void loop() {
-
+  offmotor();
   RPM();
-  if (digitalRead(buttonTest) == 0) {
+  if (digitalRead(buttonTest) == 0 && OffMode == 0) {
     if (sowichMode == 1) {
-      sowichMode = 0;
-      angleStart = 0;
-      for (int i = 0; i < ZeroPos; i++) stepDown();
+
+      while (1) {
+        RPM();
+        String show = String(currentRPM);
+        My_Display.String_To_Buffer(show, Default_Brightness);
+        if (digitalRead(buttonTest) == 1) break;
+        if (currentRPM >= 1000) break;
+      }
+      if (digitalRead(buttonTest) == 0) {
+        sowichMode = 0;
+        angleStart = 0;
+        for (int i = 0; i < ZeroPos; i++) stepDown();
+        while (1) {
+          RPM();
+          String show = String(currentRPM);
+          My_Display.String_To_Buffer(show, Default_Brightness);
+          for (int i = 0; i < 30; i++) stepDown();
+          if (currentRPM <= 1000) {
+            delay(30000);
+            break;
+          }
+        }
+      }
     }
     Steper();
   }

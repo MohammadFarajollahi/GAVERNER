@@ -1,14 +1,15 @@
 
 int maxCurrent = 60;
-int maxAngle = 20;
-int maxRPM = 1400;  // 1240
+int maxAngle = 100;
+int maxRPM = 1520;  // 1240
 int minRPM;
 int lastAngle;
-int rpmThreshold = 30;
+int rpmThreshold = 15;
 int rpmThresholdHigh = 100;
 int checkTime = 100;
 int LowRpm;
 int SerialTime;
+int rpmThresholdmax = 50;
 
 void Steper() {
   digitalWrite(led, HIGH);
@@ -17,7 +18,7 @@ void Steper() {
   //AngleUser = 1;
 
   adcCurrent = analogRead(A2);
-  minRPM = map(adcCurrent, 0, 1024, 900, maxRPM);
+  minRPM = map(adcCurrent, 0, 1024, 100, maxRPM);
   // minRPM = 900;
 
   int adcValue = analogRead(A3);
@@ -45,42 +46,42 @@ void Steper() {
       ////////////////Servo Angle/////////////////
       //+++++++++++++++++++++++++++Up++++++++++++++++++++++++++++++++
       if (CheckTime == 0) {
-        if (currentRPM <= (maxRPM - rpmThreshold) && currentRPM >= 1150) {
+        if (currentRPM <= (maxRPM - rpmThreshold)) {
           Up = 1;
           stepMove = 1;
           CheckTime = 1;
           ++angle;
         }
 
-        if (currentRPM <= 1150 && currentRPM >= 1140) {
+        if (currentRPM <= (maxRPM - rpmThresholdmax)) {
           Up = 3;
           stepMove = 1;
           CheckTime = 1;
           angle += 2;
         }
 
-        if (currentRPM <= 1140 && currentRPM > 1100) {
-          Up = 4;
-          stepMove = 1;
-          CheckTime = 1;
-          angle += 3;
-        }
+        // if (currentRPM <= 1140 && currentRPM > 1100) {
+        //   Up = 4;
+        //   stepMove = 1;
+        //   CheckTime = 1;
+        //   angle += 3;
+        // }
 
-        if (currentRPM <= 1100 && currentRPM >= 500) {
-          Up = 5;
-          stepMove = 1;
-          CheckTime = 1;
-          angle += 4;
-        }
+        // if (currentRPM <= 1100 && currentRPM >= 500) {
+        //   Up = 5;
+        //   stepMove = 1;
+        //   CheckTime = 1;
+        //   angle += 4;
+        // }
 
-        if (currentRPM <= (1100) && angleStart == 0) {
-          //Serial.println("First Up");
-          Up = 5;
-          angleStart = 1;
-          stepMove = 1;
-          CheckTime = 1;
-          angle += 10;
-        }
+        // if (currentRPM <= (1100) && angleStart == 0) {
+        //   //Serial.println("First Up");
+        //   Up = 5;
+        //   angleStart = 1;
+        //   stepMove = 1;
+        //   CheckTime = 1;
+        //   angle += 10;
+        // }
       }
 
       if (CheckTime == 1) ++readTime;
@@ -97,42 +98,42 @@ void Steper() {
           angle--;
         }
 
-        if (currentRPM >= (maxRPM + rpmThreshold)) {
-          Down = 2;
+        if (currentRPM >= (maxRPM + rpmThresholdmax)) {
+          Down = 3;
           stepMove = 1;
           CheckTime2 = 1;
           readTime2 = 0;
           angle -= 2;
         }
 
-        if (currentRPM >= (1300) && currentRPM < (1400)) {
-          Down = 5;
-          stepMove = 1;
-          CheckTime2 = 1;
-          readTime2 = 0;
-          angle -= 4;
-        }
-        if (currentRPM >= (1400) && currentRPM < (1500)) {
-          Down = 6;
-          stepMove = 1;
-          CheckTime2 = 1;
-          readTime2 = 0;
-          angle -= 5;
-        }
-        if (currentRPM >= (1500) && currentRPM < (1600)) {
-          Down = 7;
-          stepMove = 1;
-          CheckTime2 = 1;
-          readTime2 = 0;
-          angle -= 6;
-        }
-        if (currentRPM >= (1600) && currentRPM < (5000)) {
-          Down = 8;
-          stepMove = 1;
-          CheckTime2 = 1;
-          readTime2 = 0;
-          angle -= 7;
-        }
+        // if (currentRPM >= (1300) && currentRPM < (1400)) {
+        //   Down = 5;
+        //   stepMove = 1;
+        //   CheckTime2 = 1;
+        //   readTime2 = 0;
+        //   angle -= 4;
+        // }
+        // if (currentRPM >= (1400) && currentRPM < (1500)) {
+        //   Down = 6;
+        //   stepMove = 1;
+        //   CheckTime2 = 1;
+        //   readTime2 = 0;
+        //   angle -= 5;
+        // }
+        // if (currentRPM >= (1500) && currentRPM < (1600)) {
+        //   Down = 7;
+        //   stepMove = 1;
+        //   CheckTime2 = 1;
+        //   readTime2 = 0;
+        //   angle -= 6;
+        // }
+        // if (currentRPM >= (1600) && currentRPM < (5000)) {
+        //   Down = 8;
+        //   stepMove = 1;
+        //   CheckTime2 = 1;
+        //   readTime2 = 0;
+        //   angle -= 7;
+        // }
       }
 
       if (CheckTime2 == 1) ++readTime2;
@@ -153,17 +154,17 @@ void Steper() {
       if (angle < 0) angle = 0;
 
       //*************************گاز خاموش وقتی دور موتور خوابید**********************
-      if (currentRPM <= 500 && lowRpmCheck == 0) {
-        angleStart = 0;
-        lowRpmCheck = 1;
-        Down = 0;
-        Up = 0;
-        stepMove = 0;
-        angle = 0;
-        checkrpm = 0;
-        RPMok = 0;
-        for (int i = 0; i < ZeroPos; i++) stepDown();
-      }
+      // if (currentRPM <= minRPM && lowRpmCheck == 0) {
+      //   angleStart = 0;
+      //   lowRpmCheck = 1;
+      //   Down = 0;
+      //   Up = 0;
+      //   stepMove = 0;
+      //   angle = 0;
+      //   checkrpm = 0;
+      //   RPMok = 0;
+      //   for (int i = 0; i < ZeroPos; i++) stepDown();
+      // }
 
       if (currentRPM >= minRPM && lowRpmCheck == 1) {
         lowRpmCheck = 0;

@@ -2,6 +2,7 @@
 
 void test() {
   sowichMode = 1;
+  OffMode = 0;
   digitalWrite(led, 0);
   //right
   if (digitalRead(buttUP) == 0) {
